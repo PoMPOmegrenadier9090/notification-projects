@@ -16,7 +16,6 @@ def send_data(data_list):
     body = ""
     for data in data_list:
         body += f"スレッド: {data['year']}\n本文: {data['main_content']}\n{URL[data['year']]}\n"
-# ...existing code...
 
     print(body)
     msg = MIMEText(body)
