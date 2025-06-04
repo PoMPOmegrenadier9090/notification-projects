@@ -1,2 +1,2 @@
-config.py
-__pycache__/
+boards_notification/config.py
+boards_notification/__pycache__/
