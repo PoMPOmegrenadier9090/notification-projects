@@ -1,2 +1,6 @@
 boards_notification/config.py
 boards_notification/__pycache__/
+calendar_message/config.py
+calendar_message/__pycache__/
+calendar_message/venv/
+calendar_message/secrets/
