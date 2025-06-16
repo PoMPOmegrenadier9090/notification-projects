@@ -5,13 +5,17 @@ from LINE_API import broadcast
 def main():
     account='me'
     event_list = google_calendar_API.main(account)
-    text = f"""
-おはようございます！ 
-本日の予定は... \n
-{"".join(f"{event.keys()}: {event.values()}" for event in event_list)}
-    """
+    event_info = ""
+    if event_list:
+        for idx,event in enumerate(event_list):
+            try:
+                event_info += f"{idx+1}. {event['summary']} ({event['start']['dateTime'][11:16]})\n"
+            except:
+                event_info += f"{idx+1}. {event['summary']} \n"
 
-    print(text)
+    text = f"""{{sparkle}}おはようございます！ 
+本日の予定は... \n
+{event_info}"""
 
     messages = [
             {

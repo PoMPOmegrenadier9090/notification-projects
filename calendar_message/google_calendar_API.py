@@ -44,9 +44,7 @@ def main(account):
     # set the time length
     jst = pytz.timezone('Asia/Tokyo')
     jst_time = datetime.datetime.now(jst)
-    timeMax = jst_time
-    # timeMax = jst_time + datetime.timedelta(days=1)
-    timeMax = timeMax.replace(hour=23, minute=59, second=59, microsecond=999999).isoformat()
+    timeMax = jst_time.replace(hour=23, minute=59, second=59, microsecond=999999).isoformat()
     timeMin = jst_time.replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
     print('jst_time:', jst_time)
     print('timeMin:', timeMin)
@@ -66,24 +64,16 @@ def main(account):
     )
     events = events_result.get("items", [])
 
-    event_list = []
     if not events:
       print("No upcoming events found.")
+      return None
 
     # Prints the start and name of the next 10 events
     else:
-      for event in events:
-        start = event["start"].get("dateTime", event["start"].get("date")).replace('T', ' ')
-        record = {
-          event["summary"]: start
-        }
-        event_list.append(record)
+      return events
 
   except HttpError as error:
     print(f"An error occurred: {error}")
-    
-  print(event_list)
-  return event_list
 
 
 if __name__ == "__main__":
