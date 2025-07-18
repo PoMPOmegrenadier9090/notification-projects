@@ -12,10 +12,11 @@ import config as c
 
 
 def get_credential(account):
+  creds = None
   if os.path.exists(f"secrets/token_{account}.json"):
     creds = Credentials.from_authorized_user_file(f"secrets/token_{account}.json", c.SCOPES)
   # If there are no (valid) credentials available, let the user log in.
-  if not creds or not creds.valid:
+  if (creds is None) or (not creds.valid):
     if creds and creds.expired and creds.refresh_token:
       creds.refresh(Request())
     else:
